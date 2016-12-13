@@ -26,7 +26,7 @@ class ProductRepositoryRequestRecorderDecoratorSpec extends ObjectBehavior
         $this->shouldHaveType(ProductRepository::class);
     }
 
-    public function it_finds_product_via_product_repository_and_records_product_request_via_recorder(
+    public function it_should_find_product_via_product_repository_and_records_product_request_via_recorder(
         ProductRepository $productRepository,
         ProductRequestRecorder $productRequestRecorder
     )

@@ -29,7 +29,7 @@ class JsonProductRequestRecorderSpec extends ObjectBehavior
         $this->shouldHaveType(ProductRequestRecorder::class);
     }
 
-    public function it_records_record_on_empty_data(
+    public function it_should_write_record_on_empty_data(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
         JsonParser $jsonParser
     ) {
@@ -45,7 +45,7 @@ class JsonProductRequestRecorderSpec extends ObjectBehavior
         $this->record($id);
     }
 
-    public function it_records_record_on_product_already_saved_in_data(
+    public function it_should_write_record_on_product_already_saved_in_data(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
         JsonParser $jsonParser
     ) {
