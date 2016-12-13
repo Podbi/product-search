@@ -34,8 +34,7 @@ class FilesystemProductCacheSpec extends ObjectBehavior
         AbstractCachePool $cachePool,
         ProductCacheItemTransformer $productCacheItemTransformer,
         CacheItemInterface $cacheItem
-    )
-    {
+    ) {
         $id = 42;
         $product = ['id' => $id];
 
