@@ -3,6 +3,7 @@ namespace ProductSearchFramework\RequestRecorder;
 
 use ProductSearch\RequestRecorder\ProductRequestRecorder;
 use ProductSearch\RequestRecorder\ProductRequestRecorderRepository;
+use ProductSearchFramework\Json\JsonParser;
 
 class JsonProductRequestRecorder implements ProductRequestRecorder
 {
@@ -12,21 +13,21 @@ class JsonProductRequestRecorder implements ProductRequestRecorder
     private $productRequestRecorderRepository;
 
     /**
-     * @var JsonProductRequestParser
+     * @var JsonParser
      */
-    private $jsonProductRequestParser;
+    private $jsonParser;
 
     public function __construct(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
-        JsonProductRequestParser $jsonProductRequestParser
+        JsonParser $jsonParser
     ) {
         $this->productRequestRecorderRepository = $productRequestRecorderRepository;
-        $this->jsonProductRequestParser = $jsonProductRequestParser;
+        $this->jsonParser = $jsonParser;
     }
 
     public function record($id)
     {
-        $records = $this->jsonProductRequestParser->decode($this->productRequestRecorderRepository->read());
+        $records = $this->jsonParser->decode($this->productRequestRecorderRepository->read());
 
         if (!isset($records[$id])) {
             $records[$id] = 0;
@@ -34,7 +35,7 @@ class JsonProductRequestRecorder implements ProductRequestRecorder
 
         ++$records[$id];
 
-        $this->productRequestRecorderRepository->write($this->jsonProductRequestParser->encode($records));
+        $this->productRequestRecorderRepository->write($this->jsonParser->encode($records));
     }
 
 }

@@ -4,7 +4,7 @@ namespace spec\ProductSearchFramework\RequestRecorder;
 use PhpSpec\ObjectBehavior;
 use ProductSearch\RequestRecorder\ProductRequestRecorder;
 use ProductSearch\RequestRecorder\ProductRequestRecorderRepository;
-use ProductSearchFramework\RequestRecorder\JsonProductRequestParser;
+use ProductSearchFramework\Json\JsonParser;
 use Prophecy\Argument;
 
 /**
@@ -14,9 +14,9 @@ class JsonProductRequestRecorderSpec extends ObjectBehavior
 {
     public function let(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
-        JsonProductRequestParser $jsonProductRequestParser
+        JsonParser $jsonParser
     ) {
-        $this->beConstructedWith($productRequestRecorderRepository, $jsonProductRequestParser);
+        $this->beConstructedWith($productRequestRecorderRepository, $jsonParser);
     }
 
     public function it_is_initializable()
@@ -31,15 +31,15 @@ class JsonProductRequestRecorderSpec extends ObjectBehavior
 
     public function it_records_record_on_empty_data(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
-        JsonProductRequestParser $jsonProductRequestParser
+        JsonParser $jsonParser
     ) {
         $resource = '{json:[]}';
         $records = [];
         $id = 42;
 
         $productRequestRecorderRepository->read()->willReturn($resource);
-        $jsonProductRequestParser->decode($resource)->willReturn($records);
-        $jsonProductRequestParser->encode([42 => 1])->willReturn($resource);
+        $jsonParser->decode($resource)->willReturn($records);
+        $jsonParser->encode([42 => 1])->willReturn($resource);
         $productRequestRecorderRepository->write($resource)->shouldBeCalled();
 
         $this->record($id);
@@ -47,15 +47,15 @@ class JsonProductRequestRecorderSpec extends ObjectBehavior
 
     public function it_records_record_on_product_already_saved_in_data(
         ProductRequestRecorderRepository $productRequestRecorderRepository,
-        JsonProductRequestParser $jsonProductRequestParser
+        JsonParser $jsonParser
     ) {
         $id = 42;
         $resource = '{json:[]}';
         $records = [42 => 6];
 
         $productRequestRecorderRepository->read()->willReturn($resource);
-        $jsonProductRequestParser->decode($resource)->willReturn($records);
-        $jsonProductRequestParser->encode([42 => 7])->willReturn($resource);
+        $jsonParser->decode($resource)->willReturn($records);
+        $jsonParser->encode([42 => 7])->willReturn($resource);
         $productRequestRecorderRepository->write($resource)->shouldBeCalled();
 
         $this->record($id);

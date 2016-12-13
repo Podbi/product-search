@@ -5,13 +5,13 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * @mixin \ProductSearchFramework\RequestRecorder\JsonProductRequestParser
+ * @mixin \ProductSearchFramework\Json\JsonParser
  */
-class JsonProductRequestParserSpec extends ObjectBehavior
+class JsonParserSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(\ProductSearchFramework\RequestRecorder\JsonProductRequestParser::class);
+        $this->shouldHaveType(\ProductSearchFramework\Json\JsonParser::class);
     }
 
     public function it_should_decode_json_to_array()
