@@ -1,0 +1,20 @@
+{
+    "type": "project",
+    "autoload": {
+        "psr-0": { "": "src/" },
+        "exclude-from-classmap": ["**/Tests/", "/test/*"]
+    },
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.4",
+        "phpspec/prophecy": "dev-master",
+        "phpspec/phpspec": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
